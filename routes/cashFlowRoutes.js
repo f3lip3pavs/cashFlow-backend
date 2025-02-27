@@ -6,8 +6,8 @@ routes.post('/', authAndVerify.auth, cashFlowController.createCashFlow);
 
 routes.get('/', authAndVerify.auth, authAndVerify.pagination, cashFlowController.getCashflowById);
 
-routes.delete('/:id', authAndVerify.auth, authAndVerify.isUserAuthorized, cashFlowController.deleteCashFlow);
+routes.delete('/:id', authAndVerify.auth, cashFlowController.deleteCashFlow);
 
-routes.patch('/:id', authAndVerify.auth, authAndVerify.isUserAuthorized, cashFlowController.updateCashFlow);
+routes.patch('/:id', authAndVerify.auth, cashFlowController.updateCashFlow);
 
 module.exports = routes

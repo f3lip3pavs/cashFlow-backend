@@ -25,6 +25,11 @@ const getCashflowByIdModel = (id, skip, limit) => {
     return cashFlowModel.find({$or: [{user: id}, {_id: id}]}).sort({date: -1}).skip(skip).limit(limit)// sort ordena pelo campo date de forma decrescente //o paremetro {user: 0, _id: 0} exclui esses campos do retorno da requisição
 }
 
+const getCardModel = (id) => {
+
+    return cashFlowModel.find({_id: id})
+}
+
 const deleteCashFlowModel = (id) => {
 
     return cashFlowModel.findByIdAndDelete(id);
@@ -37,4 +42,6 @@ const updateCashFlowModel = (id, obj) => {
 const countDocModel = (id) => {
     return cashFlowModel.countDocuments({user: id})
 }
-module.exports = {createCashFlowModel, getCashflowByIdModel, deleteCashFlowModel, updateCashFlowModel, countDocModel};
+
+
+module.exports = {createCashFlowModel, getCashflowByIdModel, deleteCashFlowModel, updateCashFlowModel, countDocModel, getCardModel};

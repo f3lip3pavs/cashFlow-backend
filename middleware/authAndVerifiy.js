@@ -47,22 +47,6 @@ const auth = (req, res, next) => {
     })
 }
 
-const isUserAuthorized = (req, res, next) => { //verifica se o usuario que fez a requisição é o msm que esta autorizado
-
-    cashFlowService.getCashflowByIdModel(req.params.id).then((doc) => {
-    
-        const user = doc[0].user.toString();// pq retornou um array? eu não faço ideia!
-        const userLogged = req.userID;
-
-
-        if(user !== userLogged){
-            return res.status(401).send({message: 'Unauthorized'})
-        }
-
-        next()
-    })
-}
-
 const pagination = async (req, res, next) => {
 
     try{
@@ -104,4 +88,4 @@ const pagination = async (req, res, next) => {
 
 }
 
-module.exports = {auth, isUserAuthorized, pagination}
+module.exports = {auth, pagination}

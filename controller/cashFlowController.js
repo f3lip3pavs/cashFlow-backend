@@ -29,23 +29,39 @@ const getCashflowById = async (req, res) => {
     })
 }
 
-const deleteCashFlow = (req, res) => {    
+const deleteCashFlow = (req, res) => {  
+    
+    cashFlowService.getCardModel(req.params.id).then(card => {
 
-        cashFlowService.deleteCashFlowModel(req.params.id).then((doc) => {
-            res.send(doc);
-        }).catch((e) => {
-            res.send({error: e.message});
-        });
+        if(card[0].user == req.userID){
+            cashFlowService.deleteCashFlowModel(req.params.id)
+            .then((doc) => {res.send(doc);})
+            .catch((e) => {res.send({error: e.message});});
+            return
+        }
+
+        res.send({message: 'unauthorized'})
+
+    }).catch((e) => {res.send({error: e.message});});
+
 
 };
 
 const updateCashFlow = (req, res) => {   
 
-    cashFlowService.updateCashFlowModel(req.params.id, req.body).then((doc) => {
-        res.send({updateData: req.body, doc});
-    }).catch((e) => {
-        res.send({error: e.message})
-    })
+    cashFlowService.getCardModel(req.params.id).then(card => {
+
+        if(card[0].user == req.userID){
+            cashFlowService.updateCashFlowModel(req.params.id, req.body)
+            .then((doc) => {res.send({updateData: req.body, doc});})
+            .catch((e) => {res.send({error: e.message})})
+            return
+        }
+
+        res.send({message: 'unauthorized'})
+
+    }).catch((e) => {res.send({error: e.message});});
+
 
 }
     
