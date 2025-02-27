@@ -35,6 +35,9 @@ const auth = (req, res, next) => {
             res.status(401).send({message: err.message});
         }
 
+        console.log('function auth form authAndVerify.js docode.id: ', decoded.id)
+        console.log('function auth form authAndVerify.js docode: ', decoded)
+
         userService.getUserModel(decoded.id).then(() => {
             
             req.userID = decoded.id;
