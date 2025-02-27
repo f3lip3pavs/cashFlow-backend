@@ -1,0 +1,15 @@
+
+services:
+  - type: web
+    runtime: node
+    name: cashFlow
+    repo: https://github.com/f3lip3pavs/cashFlow-backend.git
+    plan: free
+    branch: main
+    buildCommand: npm install
+    startCommand: node app.js
+    envVars:
+      - key: DATABASE_URL
+        sync: false
+      - key: PRIVATE_KEY_JWT
+        sync: false
